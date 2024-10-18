@@ -1,0 +1,14 @@
+# Build directories
+/build/
+bin/
+obj/
+out/
+*.o
+*.out
+
+# Executable files
+*.exe
+*.exe.stackdump
+*.app
+
+.env
