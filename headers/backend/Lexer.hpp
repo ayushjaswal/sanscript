@@ -12,7 +12,14 @@ using namespace std;
 
 enum Tokens {
   INT_SPT,
+  STRING_SPT,
   VARIABLE,
+  FOR_LOOP,
+  WHILE_LOOP,
+  FOR_EACH,
+  IF, 
+  ELSE,
+  ELIF,
   PRINTL,
   VOID_SPT,
   SEMICOLON,

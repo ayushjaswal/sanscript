@@ -1,0 +1,5 @@
+main: void(){ 
+  for (i:int = 0, n, 1){
+    printl(i); 
+  }
+}

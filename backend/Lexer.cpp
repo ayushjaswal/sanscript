@@ -4,6 +4,13 @@
 string tokenTypeToString(Tokens type) {
   switch(type) {
     case INT_SPT: return "INT_SPT";
+    case STRING_SPT: return "STRING_SPT";
+    case IF: return "IF";
+    case ELSE: return "ELSE";
+    case ELIF: return "ELSE IF";
+    case FOR_LOOP: return "FOR_LOOP";
+    case WHILE_LOOP: return "WHILE_LOOP";
+    case FOR_EACH: return "FOR_EACH";
     case PRINTL: return "PRINTL";
     case VOID_SPT: return "VOID_SPT";
     case SEMICOLON: return "SEMICOLON";
@@ -33,7 +40,12 @@ void Tokenize(const string input){
       while(pos < input.length() && isdigit(input[pos])) pos++;
       tokens.push_back({INT_SPT, input.substr(start, pos-start)}); 
       pos++;
-    }else if (input[pos] == ';'){
+    }else if (input[pos] == '"') {
+      size_t start = ++pos;
+      while(input[pos] != '"') pos++;
+      tokens.push_back({STRING_SPT, input.substr(start, pos-start)});
+      pos++;
+    } else if (input[pos] == ';'){
       tokens.push_back({SEMICOLON, nullopt}); 
       pos++;
     }else if (input[pos] == ':') {
@@ -74,7 +86,19 @@ void Tokenize(const string input){
         tokens.push_back({VOID_SPT, nullopt}); 
       }else if (valToken == "printl"){
         tokens.push_back({PRINTL, nullopt});
-      }else {
+      }else if (valToken == "if"){
+        tokens.push_back({IF, nullopt});
+      } else if (valToken == "else"){
+        tokens.push_back({ELSE, nullopt});
+      } else if (valToken == "elif"){
+        tokens.push_back({ELIF, nullopt});
+      } else if (valToken == "for") {
+        tokens.push_back({FOR_LOOP, nullopt});
+      } else if (valToken == "while") {
+        tokens.push_back({WHILE_LOOP, nullopt});
+      } else if (valToken == "foreach") {
+        tokens.push_back({FOR_EACH, nullopt});
+      } else {
         tokens.push_back({IDENTIFIER, input.substr(start, pos-start)}); 
       }
     } else {
